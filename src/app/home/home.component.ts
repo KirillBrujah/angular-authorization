@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-  constructor(private _router: Router) {
-
+  isLogged = false;
+  constructor(private _router: Router, private _authService: AuthService) {
+    // this.isLogged = _authService.isAuthenticated();
   }
 
   logout() {

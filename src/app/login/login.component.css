@@ -1,0 +1,36 @@
+div {
+    background-color: var(--background-color);
+    border-radius: 1em;
+    margin: 10% 30%;
+    padding: 2em 4em;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    /* row-gap: 1em; */
+    grid-template-columns: auto;
+    color: var(--on-background-color);
+}
+input[type="text"] {
+    /* width: 20em;
+    height: 2em;
+    border-radius: 0.5em;
+    display: inline-block;
+    background-color: var(--on-primary-color);
+    border: solid red; */
+    border: solid 1px var(--primary-color);
+    padding: 1em;
+    border-radius: 0.7em;
+    margin-bottom: 2em;
+    display: inline-block;
+    width: 100%;
+}
+button {
+    height: 2em;
+    width: 10em;
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    border: 2px solid var(--on-primary-color);
+    border-radius: 0.7em;
+    font-size: large;
+    font-weight: 600;
+}

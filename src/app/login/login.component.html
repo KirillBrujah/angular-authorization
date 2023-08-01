@@ -1,1 +1,8 @@
-<p>login works!</p>
+<div>
+    <h1>Login</h1>
+    <p>Login state {{isLogged}}</p>
+    <input type="text" placeholder="login" #name />
+    <input type="text" placeholder="password" #password />
+    <button (click)="login(name.value, password.value)">Login</button>
+    {{loginLoading ? "LOADING" : "NOT LOADING"}}
+</div>
