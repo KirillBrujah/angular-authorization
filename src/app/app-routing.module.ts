@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { authGuard } from './auth/auth.guard';
 import { userGuard } from './auth/user.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
     component: LoginComponent,
     title: "Login page",
     // canMatch: [() => true],
+  },
+  {
+    path: "registration",
+    component: RegistrationComponent,
+    title: "Registration page"
   },
   {
     path: '**',

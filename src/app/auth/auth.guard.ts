@@ -7,14 +7,22 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
 
+
+  // router.navigate(["registration"], {replaceUrl: true});
+  // return true;
+
   return authService.isAuthenticated()
     .then<boolean | UrlTree>(((isLogged) => {
       if (!isLogged) {
-        return inject(Router).createUrlTree(["login"]);
+        // return router.createUrlTree(["registration"]);
+        router.navigate(["login"], {replaceUrl: true});
+        // return true;
+      
       }
       return true;
     }))
-    .catch(() => {
+    .catch((reason) => {
+      console.log(reason);
       return router.createUrlTree(["login"]);
     });
 
