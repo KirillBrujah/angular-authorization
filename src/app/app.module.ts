@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoadingComponent } from './loading/loading.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './ngrx/counter/counter.reducer';
+import { MyCounterComponent } from './my-counter/my-counter.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,13 @@ import { RegistrationComponent } from './registration/registration.component';
     LoginComponent,
     PageNotFoundComponent,
     LoadingComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    MyCounterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({count: counterReducer}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

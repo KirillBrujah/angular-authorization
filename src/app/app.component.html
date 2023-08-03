@@ -1,4 +1,2 @@
 <router-outlet></router-outlet>
-<div *ngIf="authService.isLoading">
-    LOADING...
-</div>
+<app-loading *ngIf="authService.isLoading" />
