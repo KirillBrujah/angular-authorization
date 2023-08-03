@@ -12,6 +12,18 @@ import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx/counter/counter.reducer';
 import { MyCounterComponent } from './my-counter/my-counter.component';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
+/// Material
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,14 +32,28 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
     PageNotFoundComponent,
     LoadingComponent,
     RegistrationComponent,
-    MyCounterComponent
+    MyCounterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({count: counterReducer}, {})
+    StoreModule.forRoot({ count: counterReducer }, {}),
+
+    BrowserAnimationsModule,
+
+    /// Material
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline', }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,3 +5,5 @@
     --background-color: #7af3fc;
     --on-background-color: #0a2022;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

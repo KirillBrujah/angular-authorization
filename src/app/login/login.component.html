@@ -1,8 +1,23 @@
-<div>
+<div class="login-container">
     <h1>Login</h1>
     <p>Login state {{isLogged}}</p>
-    <input type="text" placeholder="login" #name />
-    <input type="text" placeholder="password" #password />
+    <!-- <input type="text" placeholder="login" #name /> -->
+    <mat-form-field >
+        <mat-label>Login</mat-label>
+        <input matInput #name/>
+    </mat-form-field>
+    
+    <div class="password-field">
+        <mat-form-field >
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" #password/>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    
+    <!-- <input type="text" placeholder="password" #password /> -->
     <button (click)="login(name.value, password.value)">Login</button>
     {{loginLoading ? "LOADING" : "NOT LOADING"}}
 </div>

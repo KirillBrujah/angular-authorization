@@ -13,13 +13,15 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   isLogged = false;
   loginLoading = false;
+  hide = true;
   constructor(public authService: AuthService, private _router: Router) {
     // this.isLogged = authService.isAuthenticated();
   }
   
   login(name: string,  password: string) {
-    // console.log({name, password});
+    console.log({name, password});
     // return;
+    
     this.loginLoading = true;
     this.authService.login().then(() => {
       console.log("IN THEN");
