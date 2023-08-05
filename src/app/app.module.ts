@@ -12,7 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx/counter/counter.reducer';
 import { MyCounterComponent } from './my-counter/my-counter.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 /// Material
@@ -20,7 +20,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -47,6 +48,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

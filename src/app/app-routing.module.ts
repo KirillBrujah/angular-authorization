@@ -17,7 +17,7 @@ const routes: Routes = [
     // loadComponent: () => import('./home/home.component').then(v => v.HomeComponent),
     component: HomeComponent,
     title: "Home page",
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   {
     path: "login",

@@ -4,19 +4,21 @@ import { inject } from '@angular/core';
 
 export const userGuard: CanActivateFn = (route, state) => {
 
+  return false;
+
   const router = inject(Router);
   const authService = inject(AuthService);
 
-  return authService.isAuthenticated()
-    .then<boolean>(((isLogged) => {
-      if (!isLogged) {
-        return false;
-      }
-      return true;
-    }))
-    .catch(() => {
-      return false;
-    });
+  // return authService.isAuthenticated()
+  //   .then<boolean>(((isLogged) => {
+  //     if (!isLogged) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }))
+  //   .catch(() => {
+  //     return false;
+  //   });
 
 
 
