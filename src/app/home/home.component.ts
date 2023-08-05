@@ -13,8 +13,10 @@ export class HomeComponent {
     // this.isLogged = _authService.isAuthenticated();
   }
 
-  logout() {
-    this._router.navigate(['/login'])
+  async logout() {
+    this._authService.logout().then((_) => {
+      this._router.navigate(['/login']);
+    });
   }
 
 }
