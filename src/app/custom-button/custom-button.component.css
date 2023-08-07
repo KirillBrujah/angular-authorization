@@ -1,0 +1,10 @@
+.container {
+    display: grid;
+    /* grid-template-columns: max-content; */
+    /* justify-content: center; */
+    justify-items: stretch;
+    justify-self: center;
+    align-items: center;
+    align-content: center;
+    border: solid red;
+}

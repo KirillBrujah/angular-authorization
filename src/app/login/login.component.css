@@ -1,3 +1,15 @@
-.login-container {
+.login-card {
     margin: 10% 30%;
+}
+
+.login-container {
+    display: grid;
+    /* justify-items: center; */
+    justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+    .login-card {
+        margin: 10% 10%;
+    }
 }

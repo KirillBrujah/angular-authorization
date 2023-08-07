@@ -1,0 +1,5 @@
+<div class="container">
+    <button mat-raised-button color="primary" *ngIf="!isLoading" (click)="click()">{{label}}</button>
+    <!-- <button mat-raised-button color="primary" (click)="login(name.value, password.value)" [disabled]="loginLoading"></button> -->
+    <mat-spinner *ngIf="isLoading" diameter="30"/>
+</div>

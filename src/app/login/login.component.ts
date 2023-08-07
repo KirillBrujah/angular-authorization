@@ -18,16 +18,19 @@ export class LoginComponent {
     // this.isLogged = authService.isAuthenticated();
   }
   
-  login(name: string,  password: string) {
-    console.log({name, password});
-    // return;
-    
-    this.loginLoading = true;
-    this.authService.login().then(() => {
-      console.log("IN THEN");
-      this.loginLoading = false;
-      this._router.navigate(["/"], {replaceUrl: true});      
-    });     
-    // this.isLogged = this.authService.isAuthenticated();
+  login(name: string,  password: string): VoidFunction {
+
+    return () => {
+      console.log({name, password});
+      // return;
+      
+      this.loginLoading = true;
+      this.authService.login().then(() => {
+        console.log("IN THEN");
+        this.loginLoading = false;
+        // this._router.navigate(["/"], {replaceUrl: true});      
+      });     
+      // this.isLogged = this.authService.isAuthenticated();
+    };
   }
 }

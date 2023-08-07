@@ -24,8 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-
-
+import { CustomButtonComponent } from './custom-button/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +35,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     LoadingComponent,
     RegistrationComponent,
     MyCounterComponent,
+    CustomButtonComponent,
   ],
   imports: [
     BrowserModule,

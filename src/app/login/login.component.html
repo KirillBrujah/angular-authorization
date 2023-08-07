@@ -1,40 +1,31 @@
-<div class="login-container">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-    
-        </mat-card-header>
-        <mat-card-content>
-            <mat-grid-list cols="1" rowHeight="6:1">
-    
-    
-    
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <mat-label>Login</mat-label>
-                        <input matInput #name />
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'" #password />
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                            [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                    </mat-form-field>
-                </mat-grid-tile>
-    
-                <mat-grid-tile>
-                    <button mat-raised-button color="primary" (click)="login(name.value, password.value)">Login</button>
-    
-                </mat-grid-tile>
-    
-    
-            </mat-grid-list>
-        </mat-card-content>
-    
-    </mat-card>
-</div>
+<mat-card class="login-card">
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+        <div class="login-container">
+            <mat-form-field>
+                <mat-label>Login</mat-label>
+                <input matInput #name />
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" #password />
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <app-custom-button [isLoading]="loginLoading || true" [click]="login(name.value, password.value)" label="Login"/>
+
+            <button mat-raised-button color="primary" (click)="login(name.value, password.value)" [disabled]="loginLoading">
+                {{!loginLoading ? 'Login' : ''}}
+                <mat-spinner *ngIf="loginLoading" diameter="30" color="primary"/>
+            </button>
+        </div>
+    </mat-card-content>
+
+</mat-card>
