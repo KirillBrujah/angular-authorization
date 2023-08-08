@@ -19,12 +19,7 @@
                 </button>
             </mat-form-field>
 
-            <app-custom-button [isLoading]="loginLoading || true" [click]="login(name.value, password.value)" label="Login"/>
-
-            <button mat-raised-button color="primary" (click)="login(name.value, password.value)" [disabled]="loginLoading">
-                {{!loginLoading ? 'Login' : ''}}
-                <mat-spinner *ngIf="loginLoading" diameter="30" color="primary"/>
-            </button>
+            <app-custom-button [isLoading]="loginLoading" [click]="login(name.value, password.value)" label="Login"/>
         </div>
     </mat-card-content>
 
