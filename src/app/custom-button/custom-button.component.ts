@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CustomButtonComponent {
   @Input() isLoading: boolean = false;
-  @Input() label!: string;
-  @Input() click!: VoidFunction;
+  @Input({ required: true }) label!: string;
+  @Input({ required: true }) click!: VoidFunction;
 }

@@ -4,6 +4,18 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-authorization": {
+      "i18n": {
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": ""
+        },
+        "locales": {
+          "uk": {
+            "translation": "src/locale/messages.uk.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +25,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
+            "i18nMissingTranslation": "error",
             "outputPath": "dist/angular-authorization",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -31,6 +45,16 @@
             "scripts": []
           },
           "configurations": {
+            "en": {
+              "localize": [
+                "en"
+              ]
+            },
+            "uk": {
+              "localize": [
+                "uk"
+              ]
+            },
             "production": {
               "budgets": [
                 {
@@ -60,6 +84,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "en": {
+              "browserTarget": "angular-authorization:build:development,en"
+            },
+            "uk": {
+              "browserTarget": "angular-authorization:build:development,uk"
+            },
             "production": {
               "browserTarget": "angular-authorization:build:production"
             },
@@ -72,7 +102,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-authorization:build"
+            "browserTarget": "angular-authorization:build",
+            "format": "xlf",
+            "outputPath": "src/locale"
           }
         },
         "test": {
@@ -92,6 +124,13 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "angular-authorization:build:production"
           }
         }
       }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-study2": {
+      "hosting": {
+        "angular-authorization": [
+          "angular-study2"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-study2"
+  }
+}
