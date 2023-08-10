@@ -1,6 +1,14 @@
 import { Component, LOCALE_ID, inject } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+
+interface LoginForm {
+  name: FormControl<string>;
+
+  password?: FormControl<string>;
+}
 
 @Component({
   selector: 'app-login',
@@ -11,6 +19,13 @@ import { Router } from '@angular/router';
   // ],
 })
 export class LoginComponent {
+
+  loginForm = new FormGroup<LoginForm>({
+    name: new FormControl('', {nonNullable: true, validators: Validators.required}),
+    password: new FormControl('', {nonNullable: true, validators: Validators.required}), 
+  });
+
+  
   isLogged = false;
   loginLoading = false;
   hide = true;
@@ -18,10 +33,11 @@ export class LoginComponent {
     // this.isLogged = authService.isAuthenticated();
   }
 
-  login(name: string, password: string): VoidFunction {
+  login(/* name: string, password: string */): VoidFunction {
+    console.log(this.loginForm.value);
 
     return () => {
-      console.log({ name, password });
+      console.log(this.loginForm.value);
       // return;
 
       this.loginLoading = true;
