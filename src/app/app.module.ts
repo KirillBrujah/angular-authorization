@@ -11,7 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx/counter/counter.reducer';
 import { MyCounterComponent } from './my-counter/my-counter.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /// Material
@@ -42,6 +42,7 @@ import { CustomButtonComponent } from './custom-button/custom-button.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
 
     /// Material
     MatSlideToggleModule,

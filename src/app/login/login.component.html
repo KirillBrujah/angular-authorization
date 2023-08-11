@@ -3,15 +3,17 @@
         <mat-card-title i18n>Login</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form class="login-container" [formGroup]="loginForm" (ngSubmit)="login()">
+        <form class="login-container"  (ngSubmit)="login()">
             <mat-form-field>
                 <mat-label>Login</mat-label>
-                <input matInput id="name" formControlName="name" />
+                <input matInput id="name" name="name" [(ngModel)] ='loginModel.name' required minlength="4"/>
+                <!-- <mat-error *ngIf="!loginForm.valid">{{getErrorMessage()}}</mat-error> -->
+                <mat-error *ngIf="!name.valid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password" />
+                <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" />
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -19,7 +21,7 @@
             </mat-form-field>
 
 
-            <button mat-raised-button color="primary" type="submit" i18n [disabled]="!loginForm.valid">Login</button>
+            <button mat-raised-button color="primary" type="submit" i18n [disabled]="!name.valid">Login</button>
 
             <!-- <app-custom-button [isLoading]="loginLoading" [click]="login()" i18n-label label="Login"/> -->
         </form>
