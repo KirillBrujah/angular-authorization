@@ -9,7 +9,7 @@ class LoginModel {
   constructor(
     public name: string,
     public password: string,
-  ) {}
+  ) { }
 }
 
 interface LoginForm {
@@ -30,7 +30,7 @@ export class LoginComponent {
   isLogged = false;
   loginLoading = false;
   hide = true;
-  
+
   // loginModel = {
   //   name: '',
   //   password: '',
@@ -38,10 +38,13 @@ export class LoginComponent {
 
   loginModel = new LoginModel('', '');
 
-  // loginForm = new FormGroup<LoginForm>({
-    name= new FormControl('', {nonNullable: true, validators: Validators.required});
-    password= new FormControl('', {nonNullable: true, validators: Validators.required});
-  // });
+  loginForm = new FormGroup<LoginForm>({
+    name: new FormControl('', {
+      nonNullable: true,
+      validators: Validators.compose([Validators.required, Validators.minLength(4)]),
+    }),
+    password: new FormControl('', { nonNullable: true, validators: Validators.required }),
+  });
 
   // loginForm = new FormGroup<LoginForm>({
   //   name: new FormControl('', {nonNullable: true, validators: Validators.required}),
@@ -49,9 +52,14 @@ export class LoginComponent {
   // });
 
   getErrorMessage(): string {
-    console.log(this.loginModel);
-    console.log(this.name.errors);
-    console.log(this.password.errors);
+    // console.log(this.loginModel);
+    // console.log({ 
+    //   loginModel: this.loginModel,
+    //   nameErrors: this.name.errors,
+    //   passwrodErrors: this.password.errors,
+    // });
+    console.log(this.loginForm.errors);
+    // console.log(this.password.errors);
     // if (this.loginForm.hasError('required')) {
     //   return 'REQUI';
     // }
@@ -59,7 +67,7 @@ export class LoginComponent {
     return "ERR";
   }
 
-  
+
   constructor(public authService: AuthService, private _router: Router) {
     // this.isLogged = authService.isAuthenticated();
   }
