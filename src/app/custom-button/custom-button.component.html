@@ -1,7 +1,9 @@
 <div class="container">
-    <button mat-raised-button color="primary" *ngIf="!isLoading" (click)="click()">{{label}}</button>
+    <button mat-raised-button color="primary" *ngIf="!loading" [type]="type" 
+    (click)="click != null ? click() : null" [disabled]="disabled" 
+    >{{label}}</button>
     <!-- <button mat-raised-button color="primary" (click)="login(name.value, password.value)" [disabled]="loginLoading"></button> -->
-    <div class="loading-container" *ngIf="isLoading" >
+    <div class="loading-container" *ngIf="loading" >
         <mat-spinner diameter="30"/>
     </div>
 </div>

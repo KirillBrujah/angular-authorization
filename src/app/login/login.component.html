@@ -1,29 +1,30 @@
 <mat-card class="login-card">
     <mat-card-header>
-        <mat-card-title i18n>Login</mat-card-title>
+        <mat-card-title i18n>Authorization</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form class="login-container"  (ngSubmit)="login()" [formGroup]="loginForm" #loginForm="ngForm">
+        <form class="login-container" (submit)="login()" [formGroup]="loginForm">
             <mat-form-field>
-                <mat-label>Login</mat-label>
-                <input matInput id="name" formControlName="name" [(ngModel)] ='loginModel.name' required/>
+                <mat-label i18n>Login</mat-label>
+                <input matInput id="name" formControlName="name" required/>
                 <!-- <mat-error *ngIf="!loginForm.valid">{{getErrorMessage()}}</mat-error> -->
                 <mat-error *ngIf="!loginForm.valid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" />
+                <mat-label i18n>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password" />
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error *ngIf="!loginForm.valid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
 
 
-            <button mat-raised-button color="primary" type="submit" i18n [disabled]="!loginForm.valid">Login</button>
+            <!-- <button mat-raised-button color="primary" type="submit" i18n [disabled]="!loginForm.valid">Login</button> -->
 
-            <!-- <app-custom-button [isLoading]="loginLoading" [click]="login()" i18n-label label="Login"/> -->
+            <app-custom-button [loading]="loginLoading" [disabled]="!loginForm.valid" i18n-label label="Enter" type="submit"/>
         </form>
     </mat-card-content>
 
