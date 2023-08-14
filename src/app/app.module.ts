@@ -10,9 +10,10 @@ import { LoadingComponent } from './loading/loading.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx/counter/counter.reducer';
-import { MyCounterComponent } from './my-counter/my-counter.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 /// Material
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -23,7 +24,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+
+/// My Components
 import { CustomButtonComponent } from './custom-button/custom-button.component';
+import { MyCounterComponent } from './my-counter/my-counter.component';
+
+/// State Management
 
 @NgModule({
   declarations: [
@@ -39,6 +45,8 @@ import { CustomButtonComponent } from './custom-button/custom-button.component';
   imports: [
     StoreModule.forRoot({ count: counterReducer }, {}),
     BrowserModule,
+    HttpClientModule,
+
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,

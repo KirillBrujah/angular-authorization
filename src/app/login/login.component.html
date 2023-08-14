@@ -6,7 +6,7 @@
         <form class="login-container" (submit)="login()" [formGroup]="loginForm">
             <mat-form-field>
                 <mat-label i18n>Login</mat-label>
-                <input matInput id="name" formControlName="name" required/>
+                <input matInput id="name" formControlName="name"/>
                 <!-- <mat-error *ngIf="!loginForm.valid">{{getErrorMessage()}}</mat-error> -->
                 <mat-error *ngIf="!loginForm.valid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>

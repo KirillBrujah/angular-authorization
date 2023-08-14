@@ -41,9 +41,12 @@ export class LoginComponent {
   loginForm = new FormGroup<LoginForm>({
     name: new FormControl('', {
       nonNullable: true,
-      validators: Validators.compose([Validators.required, Validators.minLength(4)]),
+      // validators: Validators.compose([Validators.required, Validators.minLength(4)]),
     }),
-    password: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    password: new FormControl('', {
+      nonNullable: true,
+      // validators: Validators.required,
+    }),
   });
 
 
@@ -73,10 +76,14 @@ export class LoginComponent {
 
   async login(/* name: string, password: string */) {
     this.loginLoading = true;
-    this.authService.login().then(() => {
+    const {name, password} = this.loginForm.value;
+    this.authService.login(name!, password!).then((result) => {
+      if (!result) return;
       console.log("IN THEN");
+      // this._router.navigate(["/"], {replaceUrl: true});      
+    }).finally(() => {
       this.loginLoading = false;
-      this._router.navigate(["/"], {replaceUrl: true});      
     });
+
   }
 }
