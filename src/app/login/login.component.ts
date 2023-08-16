@@ -3,14 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import '@angular/localize/init';
-
-
-class LoginModel {
-  constructor(
-    public name: string,
-    public password: string,
-  ) { }
-}
+import { catchError, finalize } from 'rxjs';
 
 interface LoginForm {
   name: FormControl<string>;
@@ -22,21 +15,11 @@ interface LoginForm {
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  // providers: [
-  //   AuthService,
-  // ],
 })
 export class LoginComponent {
   isLogged = false;
   loginLoading = false;
   hide = true;
-
-  // loginModel = {
-  //   name: '',
-  //   password: '',
-  // };
-
-  loginModel = new LoginModel('', '');
 
   loginForm = new FormGroup<LoginForm>({
     name: new FormControl('', {
@@ -63,10 +46,6 @@ export class LoginComponent {
   // });
 
   getErrorMessage(): string {
-    // console.log(this.loginForm.errors);
-    // console.log(this.loginForm.get('name')?.errors);
-    // console.log(this.loginForm.get('password')?.errors);
-    // return '2';
     return $localize`Field is required`;
   }
 
@@ -74,16 +53,24 @@ export class LoginComponent {
   constructor(public authService: AuthService, private _router: Router) {
   }
 
-  async login(/* name: string, password: string */) {
+  async login() {
     this.loginLoading = true;
-    const {name, password} = this.loginForm.value;
-    this.authService.login(name!, password!).then((result) => {
-      if (!result) return;
-      console.log("IN THEN");
-      // this._router.navigate(["/"], {replaceUrl: true});      
-    }).finally(() => {
-      this.loginLoading = false;
-    });
-
+    const { name, password } = this.loginForm.value;
+    
+    
+    this.authService.login(name!, password!)
+      .pipe(
+        catchError((e)=>{
+          // TODO: Error Notification
+          throw e;
+        }),
+        finalize(()=>{
+          this.loginLoading = false;
+        }),
+      ).subscribe(
+        ()=>{
+          this._router.navigate(["/"], {replaceUrl: true});
+        }
+      );
   }
 }

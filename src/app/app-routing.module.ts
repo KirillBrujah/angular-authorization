@@ -24,6 +24,8 @@ const routes: Routes = [
     // loadComponent: () => import('./login/login.component').then(v => v.LoginComponent),
     component: LoginComponent,
     title: "Login page",
+    // TODO: Add guard for authorized user
+    // canActivate: [()=> false],
     // canMatch: [() => true],
   },
   {

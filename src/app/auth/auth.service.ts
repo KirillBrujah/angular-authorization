@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, retry, throwError } from 'rxjs';
+import { Observable, catchError, delay, finalize, retry, tap, throwError } from 'rxjs';
 import { User } from '../models/user';
 
 
@@ -17,74 +17,29 @@ interface PageModel {
 })
 export class AuthService {
   private isLoggedIn = false;
-
-  isLoading = false;
+  refreshing = false;
 
   constructor(private http: HttpClient) { }
 
   isAuthenticated(): boolean {
-    // return false;
     return this.isLoggedIn;
-
-    // this.isLoading = true;
-    // return new Promise(r => setTimeout(() => {
-    //   this.isLoading = false;
-    //   return r(this.isLoggedIn);
-    // }, 2500));
   }
 
-
-  private handleError(error: HttpErrorResponse) {
-    console.log(error);
-    return throwError(() => new Error("I have a bad feeling about this"));
-  }
-
-
-  async login(
+  login(
     username: string,
     password: string
-  ): Promise<boolean> {
-    this.isLoading = true;
-    try {
-      // const request = this.http.get('http://localhost:3000/auth');
-      // const result = await fetch('http://localhost:3000/auth');
-      // const result = await fetch('http://localhost:8080/welcome');
+  ) : Observable<any> {
+    
+    const request = this.http.post<User>('http://localhost:8080/signin', {
+      username, password,
+    }).pipe(
+      tap((user)=> {
+        localStorage.setItem(ACCESS_TOKEN, user.access_token);
+        this.isLoggedIn = true;    
+      }),
+    );
 
-
-      // const result = await fetch('http://localhost:8080/welcome');
-
-
-      // const request = this.http.get<PageModel>('https://reqres.in/api/users?page=2');
-      const request = this.http.post('http://localhost:8080/signin', {
-        username, password,
-      }).pipe(
-        retry(1),
-        catchError(this.handleError));
-      // const request = this.http.get('http://localhost:8080/welcome')
-
-
-
-      request.subscribe((result: User) => {
-        console.log("GET RESULT");
-        console.log(result);
-      });
-      // console.log(result);
-      this.isLoggedIn = true;
-      localStorage.setItem(ACCESS_TOKEN, "qwerty");
-
-      return true;
-
-      // console.log(request);
-    } catch (e) {
-      alert('ERROR');
-      return false;
-      //   this.isLoggedIn = true;
-      //   localStorage.setItem(ACCESS_TOKEN, "qwerty");
-      //  //
-    }
-    finally {
-      this.isLoading = false;
-    }
+    return request;
   }
 
   async logout(): Promise<boolean> {
@@ -101,7 +56,7 @@ export class AuthService {
 
     if (!accessToken) return false;
 
-    this.isLoading = true;
+    this.refreshing = true;
 
     try {
       const request = await this.http.get('http://localhost:3000/auth');
@@ -112,7 +67,7 @@ export class AuthService {
 
 
     return new Promise(r => setTimeout(() => {
-      this.isLoading = false;
+      this.refreshing = false;
       this.isLoggedIn = true;
       return r(false);
     }, 2500));
