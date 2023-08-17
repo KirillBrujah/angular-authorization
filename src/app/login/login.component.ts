@@ -2,8 +2,10 @@ import { Component, LOCALE_ID, inject } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import '@angular/localize/init';
 import { catchError, finalize } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 interface LoginForm {
   name: FormControl<string>;
@@ -50,26 +52,30 @@ export class LoginComponent {
   }
 
 
-  constructor(public authService: AuthService, private _router: Router) {
+  constructor(public authService: AuthService, private _router: Router, private _snackBar: MatSnackBar) {
   }
 
   async login() {
     this.loginLoading = true;
     const { name, password } = this.loginForm.value;
-    
-    
+
+
     this.authService.login(name!, password!)
       .pipe(
-        catchError((e)=>{
-          // TODO: Error Notification
+        catchError((e: HttpErrorResponse) => {
+          this._snackBar.open(`${e.message}`, undefined, {
+            verticalPosition: 'top',
+            horizontalPosition: "right",
+            duration: 3000,
+          })
           throw e;
         }),
-        finalize(()=>{
+        finalize(() => {
           this.loginLoading = false;
         }),
       ).subscribe(
-        ()=>{
-          this._router.navigate(["/"], {replaceUrl: true});
+        () => {
+          this._router.navigate(["/"], { replaceUrl: true });
         }
       );
   }

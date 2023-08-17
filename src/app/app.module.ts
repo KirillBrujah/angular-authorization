@@ -13,7 +13,7 @@ import { counterReducer } from './ngrx/counter/counter.reducer';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 /// Material
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -24,10 +24,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 /// My Components
 import { CustomButtonComponent } from './custom-button/custom-button.component';
 import { MyCounterComponent } from './my-counter/my-counter.component';
+import { AuthInterceptor } from './http-itnerceptors/auth-inteceptor';
 
 /// State Management
 
@@ -61,11 +63,17 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
     MatProgressSpinnerModule,
     MatCardModule,
     MatGridListModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline', }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

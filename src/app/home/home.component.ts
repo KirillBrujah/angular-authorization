@@ -14,9 +14,8 @@ export class HomeComponent {
   }
 
   async logout() {
-    this._authService.logout().then((_) => {
-      this._router.navigate(['/login']);
-    });
+    this._authService.logout();
+    this._router.navigate(['/login']);
   }
 
 }

@@ -6,6 +6,8 @@ import { authGuard } from './auth/auth.guard';
 import { userGuard } from './auth/user.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { notLoggedGuard } from './auth/not-logged.guard';
+import { loggedGuard } from './auth/logged.guard';
 
 const routes: Routes = [
   {
@@ -17,15 +19,14 @@ const routes: Routes = [
     // loadComponent: () => import('./home/home.component').then(v => v.HomeComponent),
     component: HomeComponent,
     title: "Home page",
-    canActivate: [authGuard]
+    canActivate: [notLoggedGuard]
   },
   {
     path: "login",
     // loadComponent: () => import('./login/login.component').then(v => v.LoginComponent),
     component: LoginComponent,
     title: "Login page",
-    // TODO: Add guard for authorized user
-    // canActivate: [()=> false],
+    canActivate: [loggedGuard],
     // canMatch: [() => true],
   },
   {

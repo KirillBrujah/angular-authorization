@@ -1,15 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, finalize, retry, tap, throwError } from 'rxjs';
+import { Observable, catchError, delay, finalize, map, retry, tap, throwError } from 'rxjs';
 import { User } from '../models/user';
 
 
 const ACCESS_TOKEN = "access_token";
 
 
-interface PageModel {
-  page: number;
-  total: number;
+interface Message {
+  message: string;
 }
 
 @Injectable({
@@ -28,52 +27,52 @@ export class AuthService {
   login(
     username: string,
     password: string
-  ) : Observable<any> {
-    
+  ): Observable<any> {
+
     const request = this.http.post<User>('http://localhost:8080/signin', {
       username, password,
     }).pipe(
-      tap((user)=> {
+      tap((user) => {
         localStorage.setItem(ACCESS_TOKEN, user.access_token);
-        this.isLoggedIn = true;    
+        this.isLoggedIn = true;
       }),
     );
 
     return request;
   }
 
-  async logout(): Promise<boolean> {
+  logout() {
     // TODO: Logout
-    return new Promise(r => setTimeout(() => {
-      this.isLoggedIn = false;
-      localStorage.removeItem(ACCESS_TOKEN);
-      return r(true);
-    }, 2500));
+    this.isLoggedIn = false;
+    localStorage.removeItem(ACCESS_TOKEN);
+    // return new Promise(r => setTimeout(() => {
+    //   this.isLoggedIn = false;
+    //   localStorage.removeItem(ACCESS_TOKEN);
+    //   return r(true);
+    // }, 2500));
   }
 
-  async refresh(): Promise<boolean> {
+  refresh(): Observable<boolean>{
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
-    if (!accessToken) return false;
+    if (!accessToken) {
+      return new Observable<boolean>(observer => {
+        observer.next(false);
+      });
+    };
 
     this.refreshing = true;
 
-    try {
-      const request = await this.http.get('http://localhost:3000/auth');
-      console.log(request);
-    } catch (e) {
-      //
-    }
+    const request = this.http.get<Message>('http://localhost:8080/welcome').pipe(
+      map<Message, boolean>((value, index) => {
+        // TODO: Update user state
+        return true;
+      }),
+      finalize(()=>{
+        this.refreshing = false;
+      }),
+    );
 
-
-    return new Promise(r => setTimeout(() => {
-      this.refreshing = false;
-      this.isLoggedIn = true;
-      return r(false);
-    }, 2500));
-
-
-
-    // TODO: Refresh
+    return request;
   }
 }

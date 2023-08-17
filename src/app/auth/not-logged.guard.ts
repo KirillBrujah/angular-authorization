@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router, UrlTree } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
-export const authGuard: CanActivateFn = (route, state): Observable<boolean> => {
+export const notLoggedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
 
