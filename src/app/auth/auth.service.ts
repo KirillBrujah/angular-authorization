@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, finalize, map, retry, tap, throwError } from 'rxjs';
+import { Observable, catchError, delay, finalize, map, of, retry, tap, throwError } from 'rxjs';
 import { User } from '../models/user';
 
 
@@ -56,6 +56,7 @@ export class AuthService {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
     if (!accessToken) {
+      return of(false);
       return new Observable<boolean>(observer => {
         observer.next(false);
       });
@@ -65,7 +66,7 @@ export class AuthService {
 
     const request = this.http.get<Message>('http://localhost:8080/welcome').pipe(
       map<Message, boolean>((value, index) => {
-        // TODO: Update user state
+        // TODO: Update user state based on value
         return true;
       }),
       finalize(()=>{

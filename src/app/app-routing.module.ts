@@ -19,14 +19,14 @@ const routes: Routes = [
     // loadComponent: () => import('./home/home.component').then(v => v.HomeComponent),
     component: HomeComponent,
     title: "Home page",
-    canActivate: [notLoggedGuard]
+    // canActivate: [notLoggedGuard]
   },
   {
     path: "login",
     // loadComponent: () => import('./login/login.component').then(v => v.LoginComponent),
     component: LoginComponent,
     title: "Login page",
-    canActivate: [loggedGuard],
+    // canActivate: [loggedGuard],
     // canMatch: [() => true],
   },
   {

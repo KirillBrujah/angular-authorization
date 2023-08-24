@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,11 +27,17 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 /// My Components
+import { ChevronRightComponent, ChevronLeftComponent } from './icons';
 import { CustomButtonComponent } from './custom-button/custom-button.component';
 import { MyCounterComponent } from './my-counter/my-counter.component';
 import { AuthInterceptor } from './http-itnerceptors/auth-inteceptor';
+import { CarouselComponent } from './carousel/carousel/carousel.component';
 
 /// State Management
+
+import { register } from 'swiper/element';
+
+register();
 
 @NgModule({
   declarations: [
@@ -43,6 +49,9 @@ import { AuthInterceptor } from './http-itnerceptors/auth-inteceptor';
     RegistrationComponent,
     MyCounterComponent,
     CustomButtonComponent,
+    CarouselComponent,
+    ChevronRightComponent,
+    ChevronLeftComponent,
   ],
   imports: [
     StoreModule.forRoot({ count: counterReducer }, {}),
@@ -76,6 +85,9 @@ import { AuthInterceptor } from './http-itnerceptors/auth-inteceptor';
       multi: true,
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
 })
 export class AppModule { }
