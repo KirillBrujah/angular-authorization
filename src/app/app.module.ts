@@ -30,7 +30,10 @@ import {
   CustomButtonComponent,
   HomeComponent,
   LoadingComponent,
+  LogoutButtonComponent,
+  LogoutIconComponent,
   MyCounterComponent,
+  NavbarComponent,
   ProgressComponent,
   SlideComponent
 } from './ui/components';
@@ -40,7 +43,7 @@ import {
   PageNotFoundComponent
 } from './ui/pages';
 
-/// State Management
+/// Swiper
 import { register } from 'swiper/element';
 
 
@@ -61,6 +64,9 @@ register();
     SlideComponent,
     ProgressComponent,
     MainComponent,
+    NavbarComponent,
+    LogoutIconComponent,
+    LogoutButtonComponent,
   ],
   imports: [
     StoreModule.forRoot({ count: counterReducer }, {}),
