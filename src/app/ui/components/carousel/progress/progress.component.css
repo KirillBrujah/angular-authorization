@@ -1,0 +1,30 @@
+
+.progress-container {
+    position: absolute;
+    z-index: 2;
+
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, 14px);
+    gap: 10px;
+    justify-content: center;
+    border-radius: 0 0 10px 10px;
+}
+
+#progress {
+    align-self: flex-end;
+    padding-bottom: 1em;
+}
+
+.progress-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: bisque;
+    border: solid 2px coral;
+    border-radius: 100%;
+    transition: all 250ms ease;
+}
+
+.progress-indicator-active {
+    background-color: coral;
+}

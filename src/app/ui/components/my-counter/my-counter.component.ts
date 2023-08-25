@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { increment } from '../ngrx/counter/counter.actions';
-import { CounterState } from '../ngrx/counter/counter.reducer';
+import { increment, CounterState } from 'src/app/ngrx/counter';
 
 
 const selectCount = (state: CounterState) => state.value;

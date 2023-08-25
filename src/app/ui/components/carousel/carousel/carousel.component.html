@@ -5,13 +5,21 @@
     
     <swiper-container #swiperRef (activeindexchange)="onActiveIndexChanged()" class="swiper1">
         <swiper-slide *ngFor="let slide of slides">
-            <div class="slide-container"><img class="slide-img" [src]="slide.src" alt="{{slide.title}}" loding="lazy" /></div>
+            <app-slide [slide]="slide" />
+            <!-- <div class="slide-container">
+                <img class="slide-img" [src]="slide.src" alt="{{slide.title}}" loding="lazy" />
+                <p>{{slide.title}}</p>
+                <p>{{slide.description}}</p>
+            </div> -->
         </swiper-slide>
     </swiper-container>
 
     <div class="control-components" id="button-next">
         <app-chevron-right size="3em" (click)="next()" />
     </div>
+    
+    <!-- <app-progress  [currentIndex]="currentIndex" [maxIndex]="slides.length" [click]="slideTo" /> -->
+
 
     <div class="control-components progress-container" id="progress">
         <div *ngFor="let slide of slides; index as i" (click)="slideTo(i)" class="progress-indicator"

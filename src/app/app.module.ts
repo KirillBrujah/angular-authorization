@@ -3,11 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LoadingComponent } from './loading/loading.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './ngrx/counter/counter.reducer';
 
@@ -27,15 +22,27 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 /// My Components
-import { ChevronRightComponent, ChevronLeftComponent } from './icons';
-import { CustomButtonComponent } from './custom-button/custom-button.component';
-import { MyCounterComponent } from './my-counter/my-counter.component';
 import { AuthInterceptor } from './http-itnerceptors/auth-inteceptor';
-import { CarouselComponent } from './carousel/carousel/carousel.component';
+import {
+  CarouselComponent,
+  ChevronLeftComponent,
+  ChevronRightComponent,
+  CustomButtonComponent,
+  HomeComponent,
+  LoadingComponent,
+  MyCounterComponent,
+  ProgressComponent,
+  SlideComponent
+} from './ui/components';
+import {
+  LoginComponent,
+  MainComponent,
+  PageNotFoundComponent
+} from './ui/pages';
 
 /// State Management
-
 import { register } from 'swiper/element';
+
 
 register();
 
@@ -46,12 +53,14 @@ register();
     LoginComponent,
     PageNotFoundComponent,
     LoadingComponent,
-    RegistrationComponent,
     MyCounterComponent,
     CustomButtonComponent,
     CarouselComponent,
     ChevronRightComponent,
     ChevronLeftComponent,
+    SlideComponent,
+    ProgressComponent,
+    MainComponent,
   ],
   imports: [
     StoreModule.forRoot({ count: counterReducer }, {}),

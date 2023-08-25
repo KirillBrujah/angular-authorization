@@ -1,0 +1,5 @@
+<div class="progress-container" id="progress">
+    <div *ngFor="let index of indexes" (click)="slide(index)" class="progress-indicator"
+        [class.progress-indicator-active]="index === currentIndex">
+    </div>
+</div>

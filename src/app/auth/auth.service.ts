@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, delay, finalize, map, of, retry, tap, throwError } from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../models';
 
 
 const ACCESS_TOKEN = "access_token";

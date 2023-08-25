@@ -1,11 +1,11 @@
 import { Component, LOCALE_ID, inject } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import '@angular/localize/init';
 import { catchError, finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/auth.service';
 
 interface LoginForm {
   name: FormControl<string>;
